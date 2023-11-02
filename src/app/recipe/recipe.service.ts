@@ -11,28 +11,33 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-
-  recipes: Recipe[] = [
-    new Recipe(
-      'Test Recipe',
-      'This is for testing', 
-      'https://clipground.com/images/clipart-food-photos.jpg',
-      [
-        new Ingredient('Meat', 1),
-        new Ingredient('Potatoe', 5)
-      ]
-     ),
-    new Recipe(
-      'Test Recipe 2', 
-      'This is also for testing', 
-      'https://clipground.com/images/clipart-food-photos.jpg',
-      [
-        new Ingredient('Bread', 3),
-        new Ingredient('Carrot', 14)
-      ])
-  ];
+  private recipes: Recipe[] = [];
+  // recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test Recipe',
+  //     'This is for testing', 
+  //     'https://clipground.com/images/clipart-food-photos.jpg',
+  //     [
+  //       new Ingredient('Meat', 1),
+  //       new Ingredient('Potatoe', 5)
+  //     ]
+  //    ),
+  //   new Recipe(
+  //     'Test Recipe 2', 
+  //     'This is also for testing', 
+  //     'https://clipground.com/images/clipart-food-photos.jpg',
+  //     [
+  //       new Ingredient('Bread', 3),
+  //       new Ingredient('Carrot', 14)
+  //     ])
+  // ];
 
   constructor(private shoppingListService: ShoppingListService) { }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     //return a copy of the array
