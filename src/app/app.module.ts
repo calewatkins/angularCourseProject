@@ -8,18 +8,19 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeService } from './recipe/recipe.service';
 import { AuthInterceptorService } from './auth/auth-interceptor';
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    //DropdownDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ShoppingListModule
+    SharedModule
   ],
   providers: [ShoppingListService, 
               RecipeService, 
@@ -27,7 +28,8 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
                 provide: HTTP_INTERCEPTORS, 
                 useClass: AuthInterceptorService, 
                 multi: true
-              }
+              },
+              
               ],
   bootstrap: [AppComponent]
 })
